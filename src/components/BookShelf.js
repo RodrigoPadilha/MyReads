@@ -6,37 +6,37 @@ import Book from "./Book";
 
 class BookShelf extends Component {
 
+  constructor(){
+    super()
 
-constructor(){
-  super()
-/*
-  this.state = {
-    booksByShelf: [],
+    this.state = {
+      booksByShelf: []
+    }
+  }
+    
+  static propTypes = {
+    bookList: PropTypes.array.isRequired,
+    changeBook: PropTypes.func.isRequired
   };
-*/
-  var booksByShelf = [];
-}
-  
-static propTypes = {
-  bookList: PropTypes.array.isRequired,
-  changeBook: PropTypes.func.isRequired
-};
 
-separaLista = (lista, match) => {
-  return lista.filter((book) => match.test(book.shelf))
-}
-                  
-changeShelf(name, shelf){
-  console.log(name)
-  console.log(shelf)
-}
+  componentWillMount(){
+    this.setState({ bookList: this.props.bookList })
+  }
 
-componentWillReceiveProps(){
-  console.log("Separou3: ", this.booksByShelf)
-}
+  separaLista = (lista, match) => {
+    return lista.filter((book) => match.test(book.shelf))
+  }
+                    
+  changeShelf(name, shelf){
+    //console.log(name)
+    //console.log(shelf)
+    //Atualizar lista aqui
+    this.props.changeBook(name, shelf)
+  }
 
   render() {    
-    this.booksByShelf = this.separaLista(this.props.bookList,new RegExp(escapeRegExp(this.props.id),''))
+    //console.log("State: ", this.state.booksByShelf)
+    let booksByShelf = this.separaLista(this.props.bookList,new RegExp(escapeRegExp(this.props.id),''))
 
     return (        
       
@@ -44,7 +44,7 @@ componentWillReceiveProps(){
         <h2 className="bookshelf-title">{this.props.labelShelf}</h2>
         <div className="bookshelf-books">
           <ol className="books-grid">
-            {this.booksByShelf.map(book => (
+            {booksByShelf.map(book => (
               <Book 
                 key={book.id} 
                 id={book.id}

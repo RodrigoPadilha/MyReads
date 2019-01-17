@@ -22,7 +22,9 @@ class MinhasLeituras extends Component {
     });            
   }
 
-  updateAllBooks(book){
+  updateAllBooks(name, shelf){
+    console.log("AVO: " + name)
+    console.log("AVO: " + shelf)
     //Recebe livro ou listaAtualizada
   }
 
