@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import * as BooksAPI from '../BooksAPI';
 import BookShelf from "./BookShelf";
 
-class MinhasLeituras extends Component {
+class MyShelves extends Component {
 
   constructor(props) {
     super(props);
@@ -11,8 +11,8 @@ class MinhasLeituras extends Component {
     this.state = {
       allBooks: [],
     };
-//    this.trocaDeEstande=this.trocaDeEstande.bind(this);
-}
+    this.updateAllBooks=this.updateAllBooks.bind(this);
+  }
 
   componentDidMount() {
     BooksAPI.getAll().then(books => {
@@ -22,29 +22,25 @@ class MinhasLeituras extends Component {
     });            
   }
 
-  updateAllBooks(name, shelf){
-    console.log("AVO: " + name)
-    console.log("AVO: " + shelf)
-    //Recebe livro ou listaAtualizada
+  updateAllBooks(id, shelf){
+    let book = this.findBook(id)
+    book.shelf = shelf
+    let newList = this.state.allBooks.filter(l => l.id !== id)  
+    newList.push( book )
+    this.setState({ allBooks: newList})
+    BooksAPI.update(book, shelf)         
   }
 
-  removerLeiturasAtuais = (livro) => {
-    this.setState(state => ({
-      leiturasAtuais: state.leiturasAtuais.filter(l => l.id !== livro.id)
-    }));
-    //BooksAPI.remove(livro)
-  }
-/*  console.log(this.state.livros.map((livro) => (
-      const match = new RegExp(escapeRegExp(livro.shelf),'i')
-        livro.title + " : " + livro.shelf      
-    )))*/
+  findBook = (id) => {
+    return this.state.allBooks.filter((l) => l.id === id)[0]
+  };
 
   render() {    
     return (            
       <div>
         <div className="list-books">
           <div className="list-books-title">
-            <h1>MyReads</h1>
+            <h1>Minhas Leituras</h1>
           </div>
 
           <div className="list-books-content">
@@ -64,4 +60,4 @@ class MinhasLeituras extends Component {
   }
 }
 
-export default MinhasLeituras;
+export default MyShelves;

@@ -3,8 +3,8 @@ import React from 'react'
 import './App.css'
 import { Route } from 'react-router-dom'
 
-import Pesquisa from './components/Pesquisa'
-import MinhasLeituras from './components/MinhasLeituras'
+import Search from './components/Search'
+import MyShelves from './components/MyShelves'
 
 class BooksApp extends React.Component {
   state = {
@@ -20,8 +20,8 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">        
-        <Route path="/busca" component={Pesquisa}/>      
-        <Route exact path="/" component={MinhasLeituras} />
+        <Route path="/busca" component={Search}/>      
+        <Route exact path="/" component={MyShelves} />
       </div>
     )
   }

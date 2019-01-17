@@ -5,37 +5,17 @@ import escapeRegExp from 'escape-string-regexp';
 import Book from "./Book";
 
 class BookShelf extends Component {
-
-  constructor(){
-    super()
-
-    this.state = {
-      booksByShelf: []
-    }
-  }
     
   static propTypes = {
     bookList: PropTypes.array.isRequired,
     changeBook: PropTypes.func.isRequired
   };
 
-  componentWillMount(){
-    this.setState({ bookList: this.props.bookList })
-  }
-
   separaLista = (lista, match) => {
     return lista.filter((book) => match.test(book.shelf))
   }
                     
-  changeShelf(name, shelf){
-    //console.log(name)
-    //console.log(shelf)
-    //Atualizar lista aqui
-    this.props.changeBook(name, shelf)
-  }
-
   render() {    
-    //console.log("State: ", this.state.booksByShelf)
     let booksByShelf = this.separaLista(this.props.bookList,new RegExp(escapeRegExp(this.props.id),''))
 
     return (        
@@ -52,7 +32,7 @@ class BookShelf extends Component {
                 title={book.title} 
                 author={book.author} 
                 shelf={book.shelf}
-                onChangeShelf={this.changeShelf} />
+                onChangeShelf={this.props.changeBook} />
             ))}
           </ol>
         </div>

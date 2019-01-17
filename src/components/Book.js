@@ -3,10 +3,7 @@ import PropTypes from "prop-types";
 
 class Book extends Component {
 
-  //<select onChange={this.props.onRemove}> 
-  
   static propTypes = {
-    //bookList: PropTypes.array.isRequired,
     onChangeShelf: PropTypes.func.isRequired
   };
 
