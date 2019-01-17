@@ -1,0 +1,37 @@
+
+/*                  
+componentWillMount(){
+  this.aux++;
+  console.log(this.aux + " componentWillMount")
+  console.log(this.aux + " - " + this.props.bookList)
+}
+
+componentDidMount() {
+  this.aux++;
+  console.log(this.aux + " componentDidMount")
+  console.log(this.aux + " - " + this.props.bookList)
+}
+
+componentWillReceiveProps(){
+  this.aux++;
+  console.log(this.aux + " componentWillReceiveProps")
+  console.log(this.aux + " - " + this.props.bookList)
+}
+
+componentWillUpdate(){
+  this.aux++;
+  console.log(this.aux + " componentWillUpdate")
+  console.log(this.aux + " - " + this.props.bookList)
+  //console.log(this.props.id)
+  //console.log(this.props.bookList)
+  //const list = this.separaLista(this.props.bookList,new RegExp(escapeRegExp(this.props.id),''))
+  //console.log("Separou: " + list)
+} 
+
+componentDidUpdate(){
+  this.aux++;
+  console.log(this.aux + " componentDidUpdate")
+  console.log(this.aux + " - " + this.props.bookList)
+} 
+               
+*/
