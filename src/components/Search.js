@@ -20,7 +20,7 @@ class Search extends Component {
       BooksAPI.search(query).then(books => {       
         this.listOfBooks = books       
       }).catch(error => {
-        console.log("Deu Ruim")
+        console.log("Deu Ruim!")
       });   
     }
     this.setState({ query: query, list: this.listOfBooks });
