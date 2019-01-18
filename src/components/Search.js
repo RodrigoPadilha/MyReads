@@ -1,28 +1,64 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import * as BooksAPI from '../BooksAPI';
 
-class Pesquisa extends Component {
-  render() {
-    return (
+import Book from "./Book";
+
+class Search extends Component {
+
+  constructor(){
+    super();
+    this.listOfBooks = []
+  }
+  state = {
+    query: "",    
+    list:[]
+  };
+
+  updateList = (query) => {
+    if(query){
+      BooksAPI.search(query).then(books => {       
+        this.listOfBooks = books       
+      }).catch(error => {
+        console.log("Deu Ruim")
+      });   
+    }
+    this.setState({ query: query, list: this.listOfBooks });
+  };
+
+  updateBook(id, shelf){
+    let book = BooksAPI.get(id)
+    console.log(book)
+    BooksAPI.update(book, shelf)
+  }
+
+  render() {    
+    
+    return (      
       <div>
         <div className="search-books">
           <div className="search-books-bar">
-            {/*<a className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</a>*/}
             <Link to="/" className="close-search">Close</Link>
             <div className="search-books-input-wrapper">
-              {/*
-                  NOTES: The search from BooksAPI is limited to a particular set of search terms.
-                  You can find these search terms here:
-                  https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-
-                  However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-                  you don't find a specific author or title. Every search is limited by search terms.
-                */}
-              <input type="text" placeholder="Search by title or author" />
+              <input type="text" placeholder="Search by title or author" value={this.state.query} onChange={(event) => this.updateList(event.target.value)}/>
             </div>
           </div>
           <div className="search-books-results">
-            <ol className="books-grid" />
+            <ol className="books-grid">
+              {this.listOfBooks.length > 0 && 
+                this.listOfBooks.map(book => (
+                  <Book 
+                    key={book.id} 
+                    id={book.id}
+                    image={book.imageLinks.thumbnail} 
+                    title={book.title} 
+                    author={book.author} 
+                    shelf={book.shelf}
+                    onChangeShelf={this.updateBook} />
+                ))
+              }
+            </ol>
+
           </div>
         </div>
       </div>
@@ -30,4 +66,4 @@ class Pesquisa extends Component {
   }
 }
 
-export default Pesquisa;
+export default Search;
