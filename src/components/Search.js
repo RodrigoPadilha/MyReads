@@ -8,23 +8,26 @@ class Search extends Component {
 
   constructor(){
     super();
-    this.listOfBooks = []
+    this.state = {
+      query: "",    
+      listOfBooks:[]
+    };
   }
-  state = {
-    query: "",    
-    list:[]
-  };
 
   updateList = (query) => {
     if(query){
-      BooksAPI.search(query).then(books => {       
-        this.listOfBooks = books       
+      BooksAPI.search(query).then(list => {       
+        this.setState({ listOfBooks: list });       
       }).catch(error => {
-        console.log("Deu Ruim!")
+        this.setState({ listOfBooks: [] });
       });   
+    } else{
+      this.setState({ listOfBooks: [] });
     }
-    this.setState({ query: query, list: this.listOfBooks });
+    this.setState({ query: query });
   };
+
+  clearQuery = () => this.updateList("");
 
   updateBook(id, shelf){
     let book = BooksAPI.get(id)
@@ -33,7 +36,7 @@ class Search extends Component {
   }
 
   render() {    
-    
+    console.log("Estado..: ", this.state.listOfBooks)
     return (      
       <div>
         <div className="search-books">
@@ -45,8 +48,8 @@ class Search extends Component {
           </div>
           <div className="search-books-results">
             <ol className="books-grid">
-              {this.listOfBooks.length > 0 && 
-                this.listOfBooks.map(book => (
+              {this.state.listOfBooks.length > 0 && 
+                this.state.listOfBooks.map(book => (
                   <Book 
                     key={book.id} 
                     id={book.id}
@@ -56,7 +59,7 @@ class Search extends Component {
                     shelf={book.shelf}
                     onChangeShelf={this.updateBook} />
                 ))
-              }
+                }
             </ol>
 
           </div>
