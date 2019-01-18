@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import * as BooksAPI from '../BooksAPI';
+//import * as BooksAPI from '../BooksAPI';
 import BookShelf from "./BookShelf";
 
 class MyShelves extends Component {
-
+/*
   constructor(props) {
     super(props);
 
@@ -34,7 +34,7 @@ class MyShelves extends Component {
   findBook = (id) => {
     return this.state.allBooks.filter((l) => l.id === id)[0]
   };
-
+*/
   render() {    
     return (            
       <div>
@@ -45,9 +45,9 @@ class MyShelves extends Component {
 
           <div className="list-books-content">
             <div>
-              <BookShelf id="currentlyReading" labelShelf="Lendo Agora" bookList={this.state.allBooks} changeBook={this.updateAllBooks}/>
-              <BookShelf id="wantToRead"       labelShelf="Quero Ler"   bookList={this.state.allBooks} changeBook={this.updateAllBooks}/>
-              <BookShelf id="read"             labelShelf="Finalizadas" bookList={this.state.allBooks} changeBook={this.updateAllBooks}/>                        
+              <BookShelf id="currentlyReading" labelShelf="Lendo Agora" bookList={this.props.bookList} changeBook={this.props.onChangeBook}/>
+              <BookShelf id="wantToRead"       labelShelf="Quero Ler"   bookList={this.props.bookList} changeBook={this.props.onChangeBook}/>
+              <BookShelf id="read"             labelShelf="Finalizadas" bookList={this.props.bookList} changeBook={this.props.onChangeBook}/>                        
             </div>
           </div>
 
