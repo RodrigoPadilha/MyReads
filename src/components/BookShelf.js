@@ -28,7 +28,7 @@ class BookShelf extends Component {
               <Book 
                 key={book.id} 
                 id={book.id}
-                image={book.imageLinks.thumbnail} 
+                image={book.imageLinks && book.imageLinks.smallThumbnail}
                 title={book.title} 
                 author={book.author} 
                 shelf={book.shelf}

@@ -38,9 +38,9 @@ class BooksApp extends React.Component {
     let book = this.findBook(id)
     book.shelf = shelf
     let newList = this.state.allBooks.filter(l => l.id !== id)  
-    newList.push( book )
+    newList.push( book )    
     this.setState({ allBooks: newList})
-    BooksAPI.update(book, shelf)         
+    BooksAPI.update(book, shelf)          
   }
 
   findBook = (id) => {
@@ -53,7 +53,7 @@ class BooksApp extends React.Component {
         <Route path="/busca" render={() => (
           <Search bookList={this.state.allBooks} onChangeBook={this.updateAllBooks} />  
         )}/>
-        <Route render={() => (
+        <Route exact path="/" render={() => (
           <MyShelves bookList={this.state.allBooks} onChangeBook={this.updateAllBooks} />  
         )}/>
       </div>
