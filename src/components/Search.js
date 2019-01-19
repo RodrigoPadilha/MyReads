@@ -9,8 +9,6 @@ class Search extends Component {
   constructor(){
     super();
 
-    var listaAtualizada =[]
-
     this.state = {
       query: "",    
       listOfSearch:[]
@@ -34,11 +32,7 @@ class Search extends Component {
       */
 
         this.mergeLists(listOfSearch, this.props.bookList)
-        console.log("Mergeada:", this.listaAtualizada)
-        this.setState({ listOfSearch: listOfSearch });  
-
-        //Estado listOfSearch
-        //Props this.props.bookList     
+        this.setState({ listOfSearch: listOfSearch });    
       }).catch(error => {
         this.setState({ listOfSearch: [] });
       });   
@@ -55,20 +49,10 @@ class Search extends Component {
         }       
       })
     });
-    this.listaAtualizada = listaOld    
   }
-
-  clearQuery = () => this.updateList("");
-
-  componentWillReceiveProps(){
-    console.log("vai receive")    
-  }
-
 
   render() {    
-    //console.log("Lista..: ", this.props.bookList)
-    //console.log("Estado..: ", this.state.listOfSearch)  
-    console.log("Render")     
+   
     this.mergeLists(this.state.listOfSearch, this.props.bookList)    
     return (      
       <div>
