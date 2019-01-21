@@ -43,7 +43,7 @@ class BooksApp extends React.Component {
   };
 
   render() {
-    console.log("Render", this.state.allBooks)
+    //console.log("Render", this.state.allBooks)
     return (
       <div className="app">        
         <Route path="/busca" render={() => (

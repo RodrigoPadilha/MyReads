@@ -4,11 +4,13 @@ import PropTypes from "prop-types";
 class Book extends Component {
 
   static propTypes = {
+    book: PropTypes.object,
     onChangeShelf: PropTypes.func.isRequired
   };
 
   render() {  
     const { book } = this.props;
+    //console.log(book.title)
     return (      
       <div className="book">
         <div className="book-top">

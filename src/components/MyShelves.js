@@ -5,6 +5,7 @@ import BookShelf from "./BookShelf";
 class MyShelves extends Component {
 
   render() {    
+    //console.log("MyShelves.0.:", this.props.bookList)
     return (            
       <div>
         <div className="list-books">
@@ -14,9 +15,9 @@ class MyShelves extends Component {
 
           <div className="list-books-content">
             <div>
-              <BookShelf id="currentlyReading" labelShelf="Lendo Agora" bookList={this.props.bookList} changeBook={this.props.onChangeBook}/>
-              <BookShelf id="wantToRead"       labelShelf="Quero Ler"   bookList={this.props.bookList} changeBook={this.props.onChangeBook}/>
-              <BookShelf id="read"             labelShelf="Finalizadas" bookList={this.props.bookList} changeBook={this.props.onChangeBook}/>                        
+              <BookShelf id="currentlyReading" labelShelf="Lendo Agora" bookList2={this.props.bookList} changeBook={this.props.onChangeBook}/>
+              <BookShelf id="wantToRead"       labelShelf="Quero Ler"   bookList2={this.props.bookList} changeBook={this.props.onChangeBook}/>
+              <BookShelf id="read"             labelShelf="Finalizadas" bookList2={this.props.bookList} changeBook={this.props.onChangeBook}/>                        
             </div>
           </div>
 
