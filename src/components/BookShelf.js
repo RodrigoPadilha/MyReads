@@ -7,7 +7,7 @@ import Book from "./Book";
 class BookShelf extends Component {
     
   static propTypes = {
-    bookList2: PropTypes.array.isRequired,
+    bookList: PropTypes.array.isRequired,
     changeBook: PropTypes.func.isRequired
   };
 
@@ -16,12 +16,9 @@ class BookShelf extends Component {
   }
                     
   render() {    
-    //console.log("BookShelf 1..:",this.props.bookList2.length )
-    let booksByShelf = this.separaLista(this.props.bookList2,new RegExp(escapeRegExp(this.props.id),''))  //Esse find só retorna 1?!?! parece que o shelf não está sendo preenchido automaticamente na primeira mudanca
-    //console.log("BookShelf 2..:",booksByShelf.length )                                                    // ou seja, quando o livro é adicionado na biblioteca o livro não está recebendo o shelf
+    let booksByShelf = this.separaLista(this.props.bookList,new RegExp(escapeRegExp(this.props.id),''))
 
-    return (        
-      
+    return (              
       <div className="bookshelf">
         <h2 className="bookshelf-title">{this.props.labelShelf}</h2>
         <div className="bookshelf-books">

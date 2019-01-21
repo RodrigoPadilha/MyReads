@@ -18,18 +18,15 @@ class Search extends Component {
   updateList = (query) => {
     if(query){      
       BooksAPI.search(query).then((listOfSearch) => {   
-            
-         listOfSearch.map( searchBook => (           
-          this.props.bookList.map(myReadsBook => {
-            if(searchBook.id === myReadsBook.id){              
-              //searchBook.shelf = myReadsBook.shelf
-              searchBook = {...searchBook, shelf: myReadsBook.shelf}
-            } else {
-              searchBook.shelf = "none"
-            }
-            return searchBook
-          })          
-        ))                      
+        listOfSearch.map( searchBook => {
+          let book = this.props.bookList.find(myReadsBook => { return myReadsBook.id === searchBook.id})          
+          searchBook.shelf = 'none' 
+          if(book)
+            searchBook.shelf = book.shelf
+
+          return searchBook
+        })
+        
         this.setState({ listOfSearch: listOfSearch });      
       }).catch(error => {
         this.setState({ listOfSearch: [] });
@@ -39,22 +36,9 @@ class Search extends Component {
     }
     this.setState({ query: query });
   }
-  mergeLists(listaOld, listaNew){    
-    listaNew.forEach(newElement => {
-      listaOld.forEach(oldElement => {
-        if(oldElement.id === newElement.id){          
-          //oldElement.shelf = newElement.shelf                           
-          oldElement = {...oldElement, shelf: newElement.shelf}
-        } else {
-          oldElement.shelf = "none"
-        }
-      })
-    });
-  }
 
   render() {    
    
-    this.mergeLists(this.state.listOfSearch, this.props.bookList)    
     return (      
       <div>
         <div className="search-books">
@@ -75,7 +59,6 @@ class Search extends Component {
                 ))
                 }
             </ol>
-
           </div>
         </div>
       </div>
