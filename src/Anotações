@@ -1,0 +1,7 @@
+
+Usar o getSupportFragmentManager() para manter a compatibilidade com versões amis antigas do Android v4
+FragmentManager fm = getSupportFragmentManager();
+
+Precisa ter uma activity com a tag <include/>
+
+XML com um FrameLayout para inserir o Fragment

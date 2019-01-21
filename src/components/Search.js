@@ -18,21 +18,19 @@ class Search extends Component {
   updateList = (query) => {
     if(query){      
       BooksAPI.search(query).then((listOfSearch) => {   
-        /*
-        console.log(listOfSearch)          
+            
          listOfSearch.map( searchBook => (           
           this.props.bookList.map(myReadsBook => {
             if(searchBook.id === myReadsBook.id){              
-              searchBook.shelf = myReadsBook.shelf
-            }            
+              //searchBook.shelf = myReadsBook.shelf
+              searchBook = {...searchBook, shelf: myReadsBook.shelf}
+            } else {
+              searchBook.shelf = "none"
+            }
             return searchBook
           })          
         ))                      
-        this.setState({ listOfSearch: listOfSearch });  
-      */
-
-        this.mergeLists(listOfSearch, this.props.bookList)
-        this.setState({ listOfSearch: listOfSearch });    
+        this.setState({ listOfSearch: listOfSearch });      
       }).catch(error => {
         this.setState({ listOfSearch: [] });
       });   
@@ -45,8 +43,11 @@ class Search extends Component {
     listaNew.forEach(newElement => {
       listaOld.forEach(oldElement => {
         if(oldElement.id === newElement.id){          
-          oldElement.shelf = newElement.shelf                           
-        }       
+          //oldElement.shelf = newElement.shelf                           
+          oldElement = {...oldElement, shelf: newElement.shelf}
+        } else {
+          oldElement.shelf = "none"
+        }
       })
     });
   }
@@ -69,11 +70,7 @@ class Search extends Component {
                 this.state.listOfSearch.map(book => (                  
                   <Book 
                     key={book.id} 
-                    id={book.id}
-                    image={book.imageLinks && book.imageLinks.smallThumbnail}
-                    title={book.title} 
-                    author={book.author} 
-                    shelf={book.shelf}
+                    book={book}
                     onChangeShelf={this.props.onChangeBook} />
                 ))
                 }

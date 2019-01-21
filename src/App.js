@@ -25,16 +25,17 @@ class BooksApp extends React.Component {
     });            
   }
 
-  updateAllBooks(id, shelf){
-    var book = this.findBook(id)
-    book = {...book, shelf: shelf}
+  updateAllBooks(book, shelf){
 
-    let newList = this.state.allBooks.filter(l => l.id !== id)  
-    newList.push( book )    
-        
-    BooksAPI.update(book, shelf)         
-    this.setState({ allBooks: newList})
+    let newList = this.state.allBooks.filter(l => l.id !== book.id)  
+    if(this.findBook(book.id))
+      book = {...book, shelf: shelf}    //Se esse livro já existir no seu array, apenas substitui a shelf.    
     
+    newList.push( book )      
+    //newList.concat([ book ])
+    this.setState({ allBooks: newList})
+        
+    BooksAPI.update(book, shelf)                 
   }
 
   findBook = (id) => {
@@ -42,6 +43,7 @@ class BooksApp extends React.Component {
   };
 
   render() {
+    console.log("Render", this.state.allBooks)
     return (
       <div className="app">        
         <Route path="/busca" render={() => (

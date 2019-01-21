@@ -8,6 +8,7 @@ class Book extends Component {
   };
 
   render() {  
+    const { book } = this.props;
     return (      
       <div className="book">
         <div className="book-top">
@@ -17,16 +18,16 @@ class Book extends Component {
               width: 128,
               height: 193,
               backgroundImage:
-                `url(${this.props.image})`                
+                `url(${this.props.book.imageLinks && this.props.book.imageLinks.smallThumbnail})`
             }}
           />
           <div className="book-shelf-changer">
             <select 
-            name={this.props.id} 
-            value={this.props.shelf} 
+            name={book.id} 
+            value={book.shelf} 
             onChange={(e) => {              
-              const { value, name } = e.target;
-              this.props.onChangeShelf(name, value)
+              const { value } = e.target;
+              this.props.onChangeShelf(book, value)
             }}> 
               <option value="move" disabled>
                 Move to...
@@ -38,8 +39,8 @@ class Book extends Component {
             </select>
           </div>
         </div>
-        <div className="book-title">{this.props.title}</div>
-        <div className="book-authors">{this.props.author}</div>
+        <div className="book-title">{book.title}</div>
+        <div className="book-authors">{book.author}</div>
       </div>
     );
   }
